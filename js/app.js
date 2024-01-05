@@ -1,3 +1,6 @@
+let totalGeral = 0;
+limpar();
+
 function adicionar() {
   //recuperar os valores do formulário (nome,quantidade e valor)
   let produto = document.getElementById("produto").value;
@@ -20,9 +23,16 @@ function adicionar() {
     `<section class="carrinho__produtos__produto"> 
           <span class="texto-azul">${quantidade}x</span> ${nomeProduto} <span class="texto-azul">R$${preco}</span>
         </section>`; //adicionar um novo na lista junto ao existente
-  //atualizar o valor total
+    //atualizar o valor total
+    //variavel totalGeral fora da função para ela n ser chamada toda vez que clicado
+    totalGeral = totalGeral + preco;
+    let campoTotal = document.getElementById("valor-total");
+    campoTotal.textContent = `R$ ${totalGeral}`;
+    document.getElementById("quantidade").value = 0; //zerar o campo de quantidade
 }
 
 function limpar() {
-
+  totalGeral = 0;
+  document.getElementById("lista-produtos").innerHTML = ""; //iniciar o carrinho vazio / sem o produto padrão
+  document.getElementById("valor-total").textContent = "R$ 0"; // total geral iniciar zerado
 }
